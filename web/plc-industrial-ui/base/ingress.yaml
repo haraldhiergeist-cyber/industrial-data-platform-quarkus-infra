@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plc-industrial-ui
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - plc-ui-quarkus.cluster.lab
+      secretName: cluster-lab-tls
+  rules:
+    - host: plc-ui-quarkus.cluster.lab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: plc-industrial-ui
+                port:
+                  number: 80

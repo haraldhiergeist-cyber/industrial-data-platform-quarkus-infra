@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: plc-industrial-ui
+  labels:
+    app.kubernetes.io/name: plc-industrial-ui
+    app.kubernetes.io/part-of: industrial-data-platform-quarkus
+spec:
+  selector:
+    app.kubernetes.io/name: plc-industrial-ui
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  type: ClusterIP

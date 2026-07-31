@@ -1,0 +1,4 @@
+defaultNamespace: industrial-quarkus
+
+kustomize:
+  dir: overlays/dev

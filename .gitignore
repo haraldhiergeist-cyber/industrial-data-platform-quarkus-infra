@@ -1,0 +1,5 @@
+# Local Kubernetes secrets and generated files
+*.local.yaml
+*.secret.yaml
+.env
+.DS_Store

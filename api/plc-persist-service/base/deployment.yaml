@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plc-persist-service
+  labels:
+    app.kubernetes.io/name: plc-persist-service
+    app.kubernetes.io/part-of: industrial-data-platform-quarkus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: plc-persist-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: plc-persist-service
+        app.kubernetes.io/part-of: industrial-data-platform-quarkus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /q/metrics
+        prometheus.io/port: "8080"
+    spec:
+      imagePullSecrets:
+        - name: harbor-regcred
+      containers:
+        - name: plc-persist-service
+          image: harbor.cluster.lab/industrial-quarkus/plc-persist-service:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: HTTP_PORT
+              value: "8080"
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: industrial-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+            - name: PLC_READINGS_TOPIC
+              value: plc.raw.readings
+            - name: KAFKA_CONSUMER_GROUP
+              value: plc-persist-quarkus-group
+            - name: DB_URL
+              value: jdbc:postgresql://postgres.cluster.lab:5432/plcdb
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: industrial-db-secret
+                  key: username
+                  optional: true
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: industrial-db-secret
+                  key: password
+                  optional: true
+          startupProbe:
+            httpGet:
+              path: /q/health/started
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: http
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

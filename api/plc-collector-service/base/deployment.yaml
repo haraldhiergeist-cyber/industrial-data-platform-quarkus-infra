@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plc-collector-service
+  labels:
+    app.kubernetes.io/name: plc-collector-service
+    app.kubernetes.io/part-of: industrial-data-platform-quarkus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: plc-collector-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: plc-collector-service
+        app.kubernetes.io/part-of: industrial-data-platform-quarkus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /q/metrics
+        prometheus.io/port: "8080"
+    spec:
+      imagePullSecrets:
+        - name: harbor-regcred
+      containers:
+        - name: plc-collector-service
+          image: harbor.cluster.lab/industrial-quarkus/plc-collector-service:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: HTTP_PORT
+              value: "8080"
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: industrial-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+            - name: PLC_READINGS_TOPIC
+              value: plc.raw.readings
+            - name: PLC_CONNECTION_STRING
+              value: s7://192.168.0.74?controller-type=S7_300
+            - name: PLC_SOURCE
+              value: plc-simulator-1
+            - name: PLC_AUTO_RECONNECT
+              value: "true"
+            - name: PLC_POLL_INTERVAL
+              value: 1s
+          startupProbe:
+            httpGet:
+              path: /q/health/started
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: http
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

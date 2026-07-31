@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: industrial-quarkus
+  labels:
+    app.kubernetes.io/name: industrial-data-platform-quarkus
+    app.kubernetes.io/part-of: industrial-data-platform
