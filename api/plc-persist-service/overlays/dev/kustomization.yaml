@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: harbor.lab.harald-hiergeist.de/sharvester/plc-persist-service
-    newTag: 6206b6a893f363c2afd68e02e066b842a02aa191
+    newTag: decc91b66c428fb7f24546e292e6b8e4316d52aa
