@@ -40,6 +40,11 @@ spec:
               value: plc-query-quarkus-group
             - name: REDIS_URL
               value: redis://redis.redis.svc.cluster.local:6379
+            - name: QUARKUS_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: industrial-redis-secret
+                  key: password
             - name: DB_URL
               value: jdbc:postgresql://platform-postgres-rw.database.svc.cluster.local:5432/plcdb
             - name: DB_USERNAME
