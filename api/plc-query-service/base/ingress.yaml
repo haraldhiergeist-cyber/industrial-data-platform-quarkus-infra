@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: plc-query-quarkus.cluster.lab
+    - host: plc-query-quarkus.lab.hiergeist-harald.de
       http:
         paths:
           - path: /
@@ -21,5 +21,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - plc-query-quarkus.cluster.lab
+        - plc-query-quarkus.lab.harald-hiergeist.de
       secretName: cluster-lab-tls
