@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: harbor.lab.harald-hiergeist.de/sharvester/plc-collector-service
-    newTag: decc91b66c428fb7f24546e292e6b8e4316d52aa
+    newTag: 961d77c819f3ef54a3bb5b9eaf63b416e26e7562
