@@ -39,7 +39,7 @@ spec:
             - name: KAFKA_CONSUMER_GROUP
               value: plc-persist-quarkus-group
             - name: DB_URL
-              value: jdbc:postgresql://platform-postgres-rw.database.svc.cluster.local:5432/platform
+              value: jdbc:postgresql://platform-postgres-rw.database.svc.cluster.local:5432/plcdb
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
