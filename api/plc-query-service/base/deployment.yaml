@@ -24,7 +24,7 @@ spec:
         - name: harbor-regcred
       containers:
         - name: plc-query-service
-          image: harbor.cluster.lab/industrial-quarkus/plc-query-service:latest
+          image: harbor.lab.harald-hiergeist.de/sharvester/plc-query-service:latest
           imagePullPolicy: Always
           ports:
             - name: http
