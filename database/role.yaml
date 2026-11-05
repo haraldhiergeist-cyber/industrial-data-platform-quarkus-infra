@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: plcuser
+  namespace: database
+spec:
+  cluster:
+    name: platform-postgres
+  name: plcuser
+  login: true
+  passwordSecret:
+    name: industrial-db-secret
+  databaseRoleReclaimPolicy: retain
