@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: harbor.lab.harald-hiergeist.de/sharvester/plc-query-service
-    newTag: 2c986458558f055a12b5ce5e06e284823d7e94c1
+    newTag: fb8699217b3ea01111c896a7350bfc3df2404f11
