@@ -2,12 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: plc-industrial-ui
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
         - plc-ui-quarkus.lab.harald-hiergeist.de
-      secretName: cluster-lab-tls
+      secretName: plc-ui-quarkus-tls
   rules:
     - host: plc-ui-quarkus.lab.harald-hiergeist.de
       http:
