@@ -2,10 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: plc-query-service
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - plc-query-quarkus.lab.harald-hiergeist.de
+      secretName: plc-query-quarkus-tls
   rules:
-    - host: plc-query.lab.harald-hiergeist.de
+    - host: plc-query-quarkus.lab.harald-hiergeist.de
       http:
         paths:
           - path: /
@@ -15,7 +21,3 @@ spec:
                 name: plc-query-service
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - plc-query.lab.harald-hiergeist.de
-      secretName: cluster-lab-tls
