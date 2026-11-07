@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: harbor.lab.harald-hiergeist.de/sharvester/plc-industrial-ui
-    newTag: 3312f936b092693dbb89527b8fe270ebc9779c5f
+    newTag: 2f1fe653a0c02393e44eac6774b0bd47804c246f
