@@ -4,5 +4,5 @@ namespace: industrial-quarkus
 resources:
   - ../../base
 images:
-  - name: harbor.cluster.lab/industrial-quarkus/plc-query-service
-    newTag: latest
+  - name: harbor.lab.harald-hiergeist.de/sharvester/plc-query-service
+    newTag: fb8699217b3ea01111c896a7350bfc3df2404f11

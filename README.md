@@ -8,9 +8,9 @@ This repository deploys the Quarkus application services in a separate
 
 - Strimzi Kafka in namespace `kafka`
 - Redis in namespace `redis`
-- external PostgreSQL at `postgres.cluster.lab`
-- Keycloak at `https://keycloak.cluster.lab`
-- ingress-nginx and the existing `cluster.lab` TLS certificate
+- external PostgreSQL at `postgres.lab.harald-hiergeist.de`
+- Keycloak at `https://keycloak.lab.harald-hiergeist.de`
+- ingress-nginx and the existing `*.harald-hiergeist.de` TLS wildcard certificate
 
 The Spring Boot deployment remains untouched in namespace `industrial`.
 
@@ -54,10 +54,10 @@ the image tag in the matching overlay.
 
 ## Hosts
 
-- UI: `https://plc-ui-quarkus.cluster.lab`
-- Query API and WebSocket: `https://plc-query-quarkus.cluster.lab`
-- OpenAPI: `https://plc-query-quarkus.cluster.lab/v3/api-docs`
-- Swagger UI: `https://plc-query-quarkus.cluster.lab/swagger-ui`
+- UI: `https://plc-ui-quarkus.lab.harald-hiergeist.de`
+- Query API and WebSocket: `https://plc-query-quarkus.lab.harald-hiergeist.de`
+- OpenAPI: `https://plc-query-quarkus.lab.harald-hiergeist.de/v3/api-docs`
+- Swagger UI: `https://plc-query-quarkus.lab.harald-hiergeist.de/swagger-ui`
 
 ## One-time preparation
 

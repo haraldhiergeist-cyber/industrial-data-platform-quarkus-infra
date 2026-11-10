@@ -4,5 +4,5 @@ namespace: industrial-quarkus
 resources:
   - ../../base
 images:
-  - name: harbor.cluster.lab/industrial-quarkus/plc-industrial-ui
-    newTag: latest
+  - name: harbor.lab.harald-hiergeist.de/sharvester/plc-industrial-ui
+    newTag: 2f1fe653a0c02393e44eac6774b0bd47804c246f

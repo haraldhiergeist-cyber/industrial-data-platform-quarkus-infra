@@ -24,7 +24,7 @@ spec:
         - name: harbor-regcred
       containers:
         - name: plc-collector-service
-          image: harbor.cluster.lab/industrial-quarkus/plc-collector-service:latest
+          image: harbor.lab.harald-hiergeist.de/sharvester/plc-collector-service:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -33,7 +33,7 @@ spec:
             - name: HTTP_PORT
               value: "8080"
             - name: KAFKA_BOOTSTRAP_SERVERS
-              value: industrial-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+              value: platform-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
             - name: PLC_READINGS_TOPIC
               value: plc.raw.readings
             - name: PLC_CONNECTION_STRING

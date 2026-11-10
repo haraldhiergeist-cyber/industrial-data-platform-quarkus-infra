@@ -3,13 +3,15 @@ kind: Ingress
 metadata:
   name: plc-query-service
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 10m
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - plc-query-quarkus.lab.harald-hiergeist.de
+      secretName: plc-query-quarkus-tls
   rules:
-    - host: plc-query-quarkus.cluster.lab
+    - host: plc-query-quarkus.lab.harald-hiergeist.de
       http:
         paths:
           - path: /
@@ -19,7 +21,3 @@ spec:
                 name: plc-query-service
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - plc-query-quarkus.cluster.lab
-      secretName: cluster-lab-tls

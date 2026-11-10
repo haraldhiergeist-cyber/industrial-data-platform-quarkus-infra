@@ -24,7 +24,7 @@ spec:
         - name: harbor-regcred
       containers:
         - name: plc-query-service
-          image: harbor.cluster.lab/industrial-quarkus/plc-query-service:latest
+          image: harbor.lab.harald-hiergeist.de/sharvester/plc-query-service:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -33,15 +33,20 @@ spec:
             - name: HTTP_PORT
               value: "8080"
             - name: KAFKA_BOOTSTRAP_SERVERS
-              value: industrial-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+              value: platform-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
             - name: PLC_READINGS_TOPIC
               value: plc.raw.readings
             - name: KAFKA_CONSUMER_GROUP
               value: plc-query-quarkus-group
             - name: REDIS_URL
               value: redis://redis.redis.svc.cluster.local:6379
+            - name: QUARKUS_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: industrial-redis-secret
+                  key: password
             - name: DB_URL
-              value: jdbc:postgresql://postgres.cluster.lab:5432/plcdb
+              value: jdbc:postgresql://platform-postgres-rw.database.svc.cluster.local:5432/plcdb
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -55,11 +60,11 @@ spec:
                   key: password
                   optional: true
             - name: KEYCLOAK_ISSUER_URI
-              value: https://keycloak.cluster.lab/realms/industrial
+              value: https://keycloak.lab.harald-hiergeist.de/realms/industrial
             - name: OIDC_CLIENT_ID
               value: plc-industrial-ui
             - name: CORS_ORIGINS
-              value: https://plc-ui-quarkus.cluster.lab,http://localhost:4200
+              value: https://plc-ui-quarkus.lab.harald-hiergeist.de,http://localhost:4200
           startupProbe:
             httpGet:
               path: /q/health/started
