@@ -43,6 +43,9 @@ industrial-data-platform-quarkus-infra/
 │   └── plc-query-service/
 ├── web/
 │   └── plc-industrial-ui/
+├── database/
+│   ├── database.yaml
+│   └── role.yaml
 ├── namespaces/
 ├── secrets/
 └── shared-platform/
