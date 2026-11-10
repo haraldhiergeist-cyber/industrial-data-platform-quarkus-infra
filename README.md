@@ -55,6 +55,14 @@ Every application contains a reusable Kustomize `base`, a `dev` overlay and a
 Fleet `fleet.yaml`. The GitLab pipeline in the application repository updates
 the image tag in the matching overlay.
 
+
+Database provisioning
+
+The database/ directory contains declarative CloudNativePG resources for the Industrial Data Platform.
+- role.yaml manages the PostgreSQL role plcuser.
+- database.yaml provisions the plcdb database in the existing platform-postgres cluster.
+Database credentials are provided through Kubernetes Secrets and are not stored in this repository.
+
 ## Hosts
 
 - UI: `https://plc-ui-quarkus.lab.harald-hiergeist.de`
